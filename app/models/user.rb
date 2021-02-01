@@ -7,20 +7,17 @@ class User < ApplicationRecord
   has_many :posts
 
   def password_string
-    @password_string ||= Password.new(self.password)
+    @password_string ||= if self.password.present?
+      Password.new(self.password)
+    end
   end
 
   def password_string=(new_password)
-    @password_string = Password.create(new_password)
-    self.password = @password_string
-  end
-
-  def login
-    @user = User.find_by_email(params[:email])
-    if @user.password == params[:password]
-      give_token
+    @password_string = if new_password.present?
+      Password.create(new_password)
+      self.password = @password_string
     else
-      redirect_to users_url
+      self.password = nil
     end
   end
 
@@ -31,5 +28,5 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: false } #to avoid email duplication
   validates :password_string,
     presence: true,
-    length: { minimum: 6, maximum: 255 }
+    length: { minimum: 6, maximum: 10 }
 end
