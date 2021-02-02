@@ -23,14 +23,22 @@ getData() {
   .then(result => {
     console.log(result)
     result.forEach(post => {
+      // this needs some attention
+      let stylingOneDiv = document.createElement('div')
+      stylingOneDiv.className = "row mb-4"
+      let stylingTwoDiv = document.createElement('div')
+      stylingTwoDiv.className = "col-xs-4 col-xs-offset-4"
       let postDiv = document.createElement('div')
-      postDiv.innerHTML = `
+      postDiv.className = "p-3 border border-dark"
+      let html = `
         <p>${post.message}</p>
         <p>created at ${post.created_at}</p>
         <p>created by ${post.user_id}</p>
       `
-      console.log(postDiv)
-      postsDiv.appendChild(postDiv)
+      postDiv.innerHTML = html
+      stylingOneDiv.appendChild(stylingTwoDiv)
+      stylingTwoDiv.appendChild(postDiv)
+      postsDiv.appendChild(stylingOneDiv)
     })}
   )}
 
