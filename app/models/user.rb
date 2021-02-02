@@ -7,17 +7,14 @@ class User < ApplicationRecord
   has_many :posts
 
   def password_string
-    @password_string ||= if self.password.present?
-      Password.new(self.password)
-    end
+    @password_string
   end
 
   def password_string=(new_password)
-    @password_string = if new_password.present?
-      Password.create(new_password)
-      self.password = @password_string
-    else
-      self.password = nil
+    @password_string = new_password
+
+    if @password_string.present?
+      self.password = Password.create(new_password)
     end
   end
 
