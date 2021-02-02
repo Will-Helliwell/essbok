@@ -46,7 +46,7 @@ create_table "posts", force: :cascade do |t|
 Open the file app/views/posts/index.html.erb and add  'created_at'
 
 ```bash
-  <p> <%= post.created_at%> </p> 
+  <p> <%= post.created_at%> </p>
 ```
 **To change the format**
 ```bash
@@ -60,7 +60,7 @@ pirate:
 Update the file index.html.erb
 
 ```bash
-  <p>Added at <%= l post.created_at, format: :short%> </p> 
+  <p>Added at <%= l post.created_at, format: :short%> </p>
 ```
 **To view data in the table**
 
@@ -72,8 +72,8 @@ Update the file index.html.erb
 
 ### Getting Heroku Running
 Do the following after every commit on the master branch.
+
 ```
 git push heroku master
 heroku run rails db:migrate
 ```
-
