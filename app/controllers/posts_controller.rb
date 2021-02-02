@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  
+
   def create
     @user = current_user
     @post = @user.posts.create(post_params)
@@ -9,6 +9,11 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.all
+  end
+
+  def index_API
+    @posts = Post.all
+    render json: @posts
   end
 
   private

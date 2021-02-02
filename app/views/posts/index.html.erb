@@ -3,11 +3,13 @@
   <div class="jumbotron">
     <div class='border-bottom border-dark'>
       <h1>Acebook</h1>
-      </div>
     </div>
   </div>
 
   <div class='container'>
+
+    <div id='like-button'></div>
+    <div id='posts-page'></div>
 
     <div id="new_post_form" class='container text-center'>
       <%= form_for @post do |form| %>
@@ -37,6 +39,10 @@
         </div>
       <% end %>
     </div>
-
   </div>
 </div>
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<%= javascript_include_tag 'LikeButton' %>
+<%= javascript_include_tag 'PostsPage' %>
