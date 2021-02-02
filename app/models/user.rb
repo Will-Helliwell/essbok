@@ -21,7 +21,7 @@ class User < ApplicationRecord
   validates :email,
     presence: true,
     length: { minimum: 10, maximum: 255 },
-    format: { with: VALID_EMAIL_REGEX, message: "email address invalid, please try again" },
+    format: { with: VALID_EMAIL_REGEX },
     uniqueness: { case_sensitive: false } #to avoid email duplication
   validates :password_string,
     presence: true,

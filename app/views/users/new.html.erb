@@ -6,19 +6,37 @@
     Already a user? <%= link_to "Sign-in", sessions_new_path %>
   </div>
 
-<%= @user.errors.full_messages %>
+<div class="alert alert-info">
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+  </div>
 
   <div id="signup_form">
     <%= form_for @user, :method => :post, params: { user: { active: true}} do |form| %>
       <div id="signup_details">
         <%= form.label :username %>
-        <%= form.text_field :username %><br>
+        <% username_classes = ['form-control'] %>
+        <% if @user.errors[:username].any? %>
+          <% username_classes << 'is-invalid' %>
+        <% end %>
+        <%= form.text_field :username, class: username_classes.join(' ') %><br>
 
         <%= form.label :email %>
-        <%= form.email_field :email %><br>
+        <% email_classes = ['form-control'] %>
+        <% if @user.errors[:email].any? %>
+          <% email_classes << 'is-invalid' %>
+        <% end %>
+        <%= form.email_field :email, class: email_classes.join(' ') %><br>
 
         <%= form.label :password_string %>
-        <%= form.password_field :password_string %><br>
+        <% password_classes = ['form-control'] %>
+        <% if @user.errors[:password_string].any? %>
+          <% password_classes << 'is-invalid' %>
+        <% end %>
+        <%= form.password_field :password_string, class: password_classes.join(' ') %><br>
       </div>
 
       <div id="signup_button">
