@@ -17,21 +17,21 @@ constructor(props) {
 getData() {
   const url = '/index_API'
   let postsDiv = document.getElementById('display-posts')
-  let postDiv = document.createElement('div')
-  let html
 
   fetch(url)
   .then(response => response.json())
   .then(result => {
     console.log(result)
-    result.forEach(post =>
+    result.forEach(post => {
+      let postDiv = document.createElement('div')
       postDiv.innerHTML = `
         <p>${post.message}</p>
         <p>created at ${post.created_at}</p>
         <p>created by ${post.user_id}</p>
-      `,
+      `
+      console.log(postDiv)
       postsDiv.appendChild(postDiv)
-    )}
+    })}
   )}
 
 //     // grabs all data in the post array
