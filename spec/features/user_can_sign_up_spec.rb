@@ -1,19 +1,16 @@
 require 'rails_helper'
+require_relative 'sign_up_login_helper'
 
 RSpec.feature "New User", type: :feature do
   scenario "Can sign up and be directed to posts" do
-    visit "/"
-    click_link "Sign Up"
-    fill_in "user[username]", with: "Stephen"
-    fill_in "user[email]", with: "stephen@test.com"
-    fill_in "user[password_string]", with: "stephen"
-    click_button "Create Account"
-    expect(current_path).to eq("/posts")
+    visit root_path
+    sign_up_stephen
+    expect(current_path).to eq posts_path
     expect(page).to have_content "Logged in as stephen@test.com."
   end
 
   scenario "Can't sign up with password shorter than 6 characters" do
-    visit "/"
+    visit root_path
     click_link "Sign Up"
     fill_in "user[username]", with: "Stephen"
     fill_in "user[email]", with: "stephen@test.com"
@@ -24,7 +21,7 @@ RSpec.feature "New User", type: :feature do
   end
 
   scenario "Can't sign up with password longer than 10 characters" do
-    visit "/"
+    visit root_path
     click_link "Sign Up"
     fill_in "user[username]", with: "Stephen"
     fill_in "user[email]", with: "stephen@test.com"
@@ -35,19 +32,11 @@ RSpec.feature "New User", type: :feature do
   end
 
   scenario "Can't sign up with same email twice" do
-    visit "/"
-    click_link "Sign Up"
-    fill_in "user[username]", with: "Stephen"
-    fill_in "user[email]", with: "stephen@test.com"
-    fill_in "user[password_string]", with: "password"
-    click_button "Create Account"
-    visit "/"
-    click_link "Sign Up"
-    fill_in "user[username]", with: "Stephen"
-    fill_in "user[email]", with: "stephen@test.com"
-    fill_in "user[password_string]", with: "password"
-    click_button "Create Account"
-    expect(current_path).to eq("/users")
+    visit root_path
+    sign_up_stephen
+    logout
+    sign_up_stephen
+    expect(current_path).to eq users_path
     expect(page).to have_content "Email has already been taken"
   end
 end
