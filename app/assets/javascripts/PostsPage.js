@@ -67,17 +67,22 @@ class Post extends React.Component {
     // }
     render() {
     return p(
-      'div',
-      undefined,
+      // React.createElement(
+      //   type,
+      //   [props],
+      //   [...children]
+      // )
+      'div', //type of element.it can also be react component ----> call this script before PostPage
+      {className: "p-3 border border-dark"}, //html tag --> attribute of the tag; react component --> props
       [
-      p("p", undefined, this.props.message),   
+      p("p", undefined, this.props.message),  
       p("p", undefined, `created at ${this.props.created_at}`),
       p("p", undefined, `created by ${this.props.username}`)
-    ]
+      ///like button --> create another class 
+    ] // content of the post --> 3 p element children
     );
   }
   }
-
 const pageContainer = document.getElementById('posts-page');
 ReactDOM.render(p(PostPage), pageContainer);
 
