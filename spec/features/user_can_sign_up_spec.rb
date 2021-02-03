@@ -11,7 +11,7 @@ RSpec.feature "New User", type: :feature do
 
   scenario "Can't sign up with password shorter than 6 characters" do
     visit root_path
-    click_link "Sign Up"
+    click_link "Sign-up"
     fill_in "user[username]", with: "Stephen"
     fill_in "user[email]", with: "stephen@test.com"
     fill_in "user[password_string]", with: "short"
@@ -22,7 +22,7 @@ RSpec.feature "New User", type: :feature do
 
   scenario "Can't sign up with password longer than 10 characters" do
     visit root_path
-    click_link "Sign Up"
+    click_link "Sign-up"
     fill_in "user[username]", with: "Stephen"
     fill_in "user[email]", with: "stephen@test.com"
     fill_in "user[password_string]", with: "verylongpassword"
