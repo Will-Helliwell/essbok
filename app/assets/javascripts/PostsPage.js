@@ -10,7 +10,7 @@ constructor(props) {
   this.state = {
     list: []
   }
-}
+  }
 
 
 // call to API
@@ -33,7 +33,7 @@ getData() {
       let html = `
         <p>${post.message}</p>
         <p>created at ${post.created_at}</p>
-        <p>created by ${post.user_id}</p>
+        <p>created by ${post.username}</p>
       `
       postDiv.innerHTML = html
       stylingOneDiv.appendChild(stylingTwoDiv)
@@ -64,3 +64,28 @@ render() {
 
 const pageContainer = document.getElementById('posts-page');
 ReactDOM.render(p(PostPage), pageContainer);
+
+
+// 'use strict';
+// console.log("im in posts")
+// var postsDiv = document.getElementById('posts-page')
+// const url ='/index_API'
+
+// fetch(url)
+// .then(response => response.json())
+// .then(data => {
+ 
+//     console.log('data')
+//     console.log(data)
+//     data.forEach(post => {
+//         let postDiv= document.createElement('div')
+//         let html= `
+//         <p>${post.message}</p>
+//         <p>added at ${post.created_at}</p>
+//         <p>added by ${post.username}</p>
+//         `
+//         postDiv.innerHTML = html
+//         postsDiv.appendChild(postDiv)
+//     })
+// }
+// )
