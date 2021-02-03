@@ -11,7 +11,7 @@ RSpec.feature "Timeline", type: :feature do
     click_link "Sign Up"
     fill_in "user[username]", with: "Stephen"
     fill_in "user[email]", with: "stephen@test.com"
-    fill_in "user[password_string]", with: "stephenisntreal"
+    fill_in "user[password_string]", with: "stephen"
     click_button "Create Account"
     visit "/posts"
     fill_in 'post[message]', with: "Hello, world!"
