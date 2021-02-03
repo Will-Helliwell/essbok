@@ -1,40 +1,45 @@
 <div>
-  <div class="jumbotron">
+  <div class="jumbotron bg-white">
     <div class='border-bottom border-dark'>
-    <h1>Sign-up</h1>
+      <h1>Sign-Up</h1>
+      </div>
     </div>
+
+<div class="alert alert-info">
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
   </div>
 
-  <div id="signup_form" class='container'>
+  <div id="signup_form">
     <%= form_for @user, :method => :post, params: { user: { active: true}} do |form| %>
-      <div class='row mb-4'>
-        <div class='col-xs-2 col-xs-offset-4 text-right'>
-          <%= form.label :username %>
-        </div>
-        <div class='col-xs-2'>
-          <%= form.text_field :username %>
-        </div>
+      <div id="signup_details">
+        <%= form.label :username %>
+        <% username_classes = ['form-control'] %>
+        <% if @user.errors[:username].any? %>
+          <% username_classes << 'is-invalid' %>
+        <% end %>
+        <%= form.text_field :username, class: username_classes.join(' ') %><br>
+
+        <%= form.label :email %>
+        <% email_classes = ['form-control'] %>
+        <% if @user.errors[:email].any? %>
+          <% email_classes << 'is-invalid' %>
+        <% end %>
+        <%= form.email_field :email, class: email_classes.join(' ') %><br>
+
+        <%= form.label :password_string %>
+        <% password_classes = ['form-control'] %>
+        <% if @user.errors[:password_string].any? %>
+          <% password_classes << 'is-invalid' %>
+        <% end %>
+        <%= form.password_field :password_string, class: password_classes.join(' ') %><br>
       </div>
-      <div class='row mb-4'>
-        <div class='col-xs-2 col-xs-offset-4 text-right'>
-          <%= form.label :email %>
-        </div>
-        <div class='col-xs-2'>
-          <%= form.email_field :email %>
-        </div>
-      </div>
-      <div class='row mb-4'>
-        <div class='col-xs-2 col-xs-offset-4 text-right'>
-          <%= form.label :password %>
-        </div>
-        <div class='col-xs-2'>
-          <%= form.password_field :password_string %>
-        </div>
-      </div>
-      <div class='row mb-4'>
-        <div class='col-xs-2 col-xs-offset-6'>
-          <%= form.submit "Create Account", :class => "btn btn-dark" %>
-        </div>
+
+      <div id="signup_button">
+        <%= form.submit "Create Account" %>
       </div>
     <% end %>
   </div>
