@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   def create
     @user = current_user
     @post = @user.posts.create(post_params)
-    render 
+
     redirect_to posts_url
   end
   def create_API
@@ -25,7 +25,29 @@ class PostsController < ApplicationController
 
   def index_API
     @post = Post.new
+<<<<<<< HEAD
     @posts = Post.includes(:user).order(created_at: :desc)
+=======
+    sql = 'SELECT posts.*, users.username
+    FROM posts
+    INNER JOIN users
+    ON posts.user_id = users.id'
+    @posts = ActiveRecord::Base.connection.execute(sql)
+json_object = {
+  "posts"=> []
+}
+      @posts.each do |post|
+      json_subnode = {
+        "id": post['id'],
+        "message": post['message'],
+        "created_at": post['created_at'],
+        "updated_at": post['updated_at'],
+        "username": post['username']
+      }
+      json_object["posts"]<< json_subnode
+      end
+    render json: @posts
+>>>>>>> removed render from posts controller
   end
 
   private

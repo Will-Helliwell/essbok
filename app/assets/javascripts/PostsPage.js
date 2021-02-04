@@ -31,37 +31,47 @@ class PostForm extends React.Component {
       },
       method: "POST",
       body: JSON.stringify({
-        message: this.state.message,
+        message: this.state.message
       }),
     })
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
       })
-      .catch((err) => {
-        console.log("er", err);
-      });
+      // .catch((err) => {
+      //   // console.log(err);
+      // });
   }
 
+  // .then((response) => {return response.json()})
+  //         .then((fruit) => {this.setState({ filtered: [...this.state.filtered, fruit] })
+  //          });
+  //   }
+
   render() {
-    return React.createElement(
+    return p(
       "form",
       {
         onSubmit: this.handleSubmit,
       },
-      React.createElement(
+      p(
         "label",
         null,
-        "Post:",
-        React.createElement("textarea", {
-          message: this.state.value,
-          onChange: this.handleChange,
-        })
+        p(
+          "textarea",
+          {
+            message: this.state.value,
+            onChange: this.handleChange,
+          }
+        )
       ),
-      React.createElement("input", {
-        type: "submit",
-        value: "Submit",
-      })
+      p(
+        "input",
+        {
+          type: "submit",
+          value: "Submit",
+        },
+      )
     );
   }
 }
@@ -88,14 +98,12 @@ class PostPage extends React.Component {
     })
   }
 
-
-
   render() {
     return p(
       "div",
       undefined,
       this.state.list.map((post_data) => {
-        console.log(post_data.id)
+        // console.log(post_data.id)
         return p(
           "div",
           { className: "row mb-4" },
