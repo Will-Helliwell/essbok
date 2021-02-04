@@ -92,14 +92,12 @@ class DeleteButton extends React.Component {
         "Content-Type": "application/json",
       },
       method: "DELETE",
-      // body: JSON.stringify({ id: this.props.id }),
     }).then(() => {
       this.props.onDeleteSuccess(this.props.id);
     });
   }
 
   render() {
-    // console.log(this.props);
     return d(
       "button",
       { onClick: () => this.deletePost() },
