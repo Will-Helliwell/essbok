@@ -9,19 +9,23 @@ class DeleteButton extends React.Component {
     super(props);
   }
 
-  deletePost() {
-    const url = "/posts/delete/:id";
-    fetch(url, {
-      method: "DELETE",
+  deletePost(event) {
+    const csrf = document
+      .querySelector("meta[name='csrf-token']")
+      .getAttribute("content");
+    event.preventDefault();
+    fetch(`/posts/delete/1`, {
       headers: {
-        "x-csrf-token": csrfToken,
+        "X-CSRF-Token": csrf,
         "Content-Type": "application/json",
       },
+      method: "DELETE",
+      // body: JSON.stringify({ id: this.props.id }),
     });
   }
 
   render() {
-    return d("button", { onClick: () => this.deletePost() }, "Hello");
+    return d("button", { onClick: (event) => this.deletePost(event) }, "Hello");
     // d("p", undefined, "Hello");
   }
 }

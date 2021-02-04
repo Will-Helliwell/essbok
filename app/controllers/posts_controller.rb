@@ -36,7 +36,7 @@ json_object = {
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
+    @post = Post.find(params[:id])
     @post.destroy
   end
 
