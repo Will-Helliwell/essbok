@@ -6,35 +6,66 @@ const p = React.createElement;
 
 class PostForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      value: ''
-    }
+      message: "",
+    };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({ message: event.target.value });
   }
 
   handleSubmit(event) {
-    event.preventDefault()
-    alert('A message was submitted: ' + this.state.value);
+    event.preventDefault();
+    const csrf = document
+      .querySelector("meta[name='csrf-token']")
+      .getAttribute("content");
+    fetch("/posts/create", {
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrf,
+      },
+      method: "POST",
+      body: JSON.stringify({
+        message: this.state.message,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log("er", err);
+      });
   }
 
   render() {
-    return p(
-      'form',
-      { onSubmit: this.handleSubmit },
-      [
-        p("textarea", { value: this.state.value, onChange: this.handleChange }, undefined),
-        p('button', undefined, "Submit")
-      ]
-    )
-
+    return React.createElement(
+      "form",
+      {
+        onSubmit: this.handleSubmit,
+      },
+      React.createElement(
+        "label",
+        null,
+        "Post:",
+        React.createElement("textarea", {
+          message: this.state.value,
+          onChange: this.handleChange,
+        })
+      ),
+      React.createElement("input", {
+        type: "submit",
+        value: "Submit",
+      })
+    );
   }
 }
+
 
 
 class PostPage extends React.Component {
