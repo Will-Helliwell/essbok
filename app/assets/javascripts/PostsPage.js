@@ -127,7 +127,11 @@ class DeleteButton extends React.Component {
 
   render() {
     console.log(this.props);
-    return d("button", { onClick: (event) => this.deletePost(event) }, "Hello");
+    return d(
+      "button",
+      { onClick: (event) => this.deletePost(event) },
+      "Delete"
+    );
   }
 }
 
