@@ -12,17 +12,14 @@
 
   render() {
     if (this.state.liked) {
-      return 'You liked this.';
+      return 'You lykked this.';
     }
 
     return e(
       'button',
       { onClick: () => this.setState({ liked: true }) },
-      'Like'
+      'Lykke'
     );
   }
 
   }
-
-  const domContainer = document.getElementById('like-button');
-  ReactDOM.render(e(LikeButton), domContainer);
