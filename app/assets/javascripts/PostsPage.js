@@ -53,7 +53,7 @@ class PostPage extends React.Component {
   render() {
     return p(
       "div",
-      { onClick: () => this.getData() },
+      undefined,
       this.state.list.map((post_data) => {
         return p(
           Post,
