@@ -14,14 +14,15 @@ class DeleteButton extends React.Component {
     fetch(url, {
       method: "DELETE",
       headers: {
+        "x-csrf-token": csrfToken,
         "Content-Type": "application/json",
       },
     });
   }
 
   render() {
-    return d("p", undefined, "Hello");
-    // d("button", { onClick: () => this.deletePost() }, "Hello");
+    return d("button", { onClick: () => this.deletePost() }, "Hello");
+    // d("p", undefined, "Hello");
   }
 }
 
