@@ -15,7 +15,7 @@ constructor(props) {
 // call to API
 getData() {
   const url = '/index_API'
-  let postsDiv = document.getElementById('display-posts') 
+  let postsDiv = document.getElementById('display-posts')
 
   fetch(url)
   .then(response => response.json())
@@ -52,14 +52,21 @@ getData() {
 
 render() {
   return p(
-    'div',
-    { onClick: () => this.getData()},
-    this.state.list.map(post_data => {
-      return p(Post, post_data, undefined)
-    })
-  );
-}
-
+      "div",
+      undefined,
+      this.state.list.map((post_data) => {
+        return p(
+          "div",
+          { className: "row mb-4" },
+          p(
+            "div",
+            { className: "col-xs-4 col-xs-offset-4" },
+            p(Post, post_data, undefined)
+          )
+        );
+      })
+    );
+ }
 }
 class Post extends React.Component {
   // constructor(props) {
@@ -75,10 +82,10 @@ class Post extends React.Component {
       'div', //type of element.it can also be react component ----> call this script before PostPage
       {className: "p-3 border border-dark"}, //html tag --> attribute of the tag; react component --> props
       [
-      p("p", undefined, this.props.message),  
+      p("p", undefined, this.props.message),
       p("p", undefined, `created at ${this.props.created_at}`),
       p("p", undefined, `created by ${this.props.username}`)
-      ///like button --> create another class 
+      ///like button --> create another class
     ] // content of the post --> 3 p element children
     );
   }
@@ -95,7 +102,7 @@ ReactDOM.render(p(PostPage), pageContainer);
 // fetch(url)
 // .then(response => response.json())
 // .then(data => {
- 
+
 //     console.log('data')
 //     console.log(data)
 //     data.forEach(post => {
