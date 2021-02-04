@@ -6,7 +6,6 @@ const p = React.createElement;
 
 class PostForm extends React.Component {
   constructor(props) {
-    // console.log(props),
     super(props)
     this.state = {
       value: ''
@@ -33,6 +32,7 @@ class PostForm extends React.Component {
         p('button', undefined, "Submit")
       ]
     )
+
   }
 }
 
@@ -54,8 +54,8 @@ class PostPage extends React.Component {
     .then(response => response.json())
     .then(result => {
       this.setState({list: result})
-    }
-    )}
+    })
+  }
 
 
 
