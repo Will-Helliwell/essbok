@@ -27,7 +27,7 @@ class PostPage extends React.Component {
   render() {
     return p(
       "div",
-      undefined,
+      { id: "contains_all_posts" },
       this.state.list.map((post_data) => {
         return p(
           Post,
@@ -66,7 +66,7 @@ class Post extends React.Component {
         p("p", undefined, `created at ${this.props.created_at}`),
         p("p", undefined, `created by ${this.props.username}`),
         p(DeleteButton, this.props, undefined),
-        ///like button --> create another class
+        p(LikeButton, undefined, undefined)
       ]
     );
   }
