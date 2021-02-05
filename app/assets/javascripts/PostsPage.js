@@ -2,46 +2,52 @@
 
 const p = React.createElement;
 
-class PostPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: [],
-    };
-    this.getData();
-  }
-  // call to API
-  getData() {
-    const url = "/index_API";
-    let postsDiv = document.getElementById("display-posts");
+// class PostPage extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       list: [],
+//     };
+//     this.getData();
+//   }
+//   // call to API
+//   getData() {
+//     const url = "/index_API";
+//     let postsDiv = document.getElementById("display-posts");
 
-    fetch(url)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("result");
-        console.log(result);
-        this.setState({ list: result });
-      });
-  }
+//     fetch(url)
+//       .then((response) => response.json())
+//       .then((result) => {
+//         console.log("result");
+//         console.log(result);
+//         this.setState({ list: result });
+//       });
+//   }
 
-  render() {
-    return p(
-      "div",
-      undefined,
-      this.state.list.map((post_data) => {
-        return p(
-          Post,
-          {
-            ...post_data,
-            onDeleteSuccess: (id) => {
-              const filterList = this.state.list.filter(
-                (post) => post.id !== id
-              );
-              this.setState({ list: filterList });
-            },
-          },
-          undefined
-        );
+//   render() {
+//     return p(
+//       "div",
+//       undefined,
+//       this.state.list.map((post_data) => {
+//         return p(
+//           Post,
+//           {
+//             ...post_data,
+//             onDeleteSuccess: (id) => {
+//               const filterList = this.state.list.filter(
+//                 (post) => post.id !== id
+//               );
+//               this.setState({ list: filterList });
+//             },
+//           },
+//           undefined
+//         );
+//       })
+//     );
+//   }
+// }
+
+// this.state.list.map(() => {});
 
 class PostForm extends React.Component {
   constructor(props) {
@@ -142,18 +148,19 @@ class PostPage extends React.Component {
             p(
               "div",
               { className: "col-xs-4 col-xs-offset-4" },
-            p(
-              Post,
-              {
-              ...post_data,
-              onDeleteSuccess: (id) => {
-                const filterList = this.state.list.filter(
-                  (post) => post.id !== id
-                );
-                this.setState({ list: filterList });
-              },
-              },
-              undefined            
+              p(
+                Post,
+                {
+                  ...post_data,
+                  onDeleteSuccess: (id) => {
+                    const filterList = this.state.list.filter(
+                      (post) => post.id !== id
+                    );
+                    this.setState({ list: filterList });
+                  },
+                },
+                undefined
+              )
             )
           );
         })
@@ -161,7 +168,7 @@ class PostPage extends React.Component {
     ];
   }
 }
-                            
+
 class Post extends React.Component {
   // constructor(props) {
   //   super(props);
@@ -211,10 +218,6 @@ class DeleteButton extends React.Component {
   }
 
   render() {
-    return p(
-      "button",
-      { onClick: () => this.deletePost() },
-      "Delete"
-    );
+    return p("button", { onClick: () => this.deletePost() }, "Delete");
   }
 }
