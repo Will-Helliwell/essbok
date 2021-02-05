@@ -28,6 +28,11 @@ class PostsController < ApplicationController
     @posts = Post.includes(:user).order(created_at: :desc)
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+  end
+
   private
 
   def post_params
