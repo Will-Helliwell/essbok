@@ -76,7 +76,6 @@ ReactDOM.render(p(PostPage), pageContainer);
 
 // Delete Button Component
 
-const d = React.createElement;
 class DeleteButton extends React.Component {
   constructor(props) {
     super(props);
@@ -98,7 +97,7 @@ class DeleteButton extends React.Component {
   }
 
   render() {
-    return d(
+    return p(
       "button",
       { onClick: () => this.deletePost() },
       "Delete"
