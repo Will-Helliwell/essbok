@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'sessions/new'
   post 'sessions/create'
   get 'sessions/destroy'
+  get '/posts', to: "posts#index"
   get '/index_API', to: "posts#index_API"
   delete '/posts/delete/:id', to: "posts#destroy"
   post '/create_API', to: "posts#create_API"

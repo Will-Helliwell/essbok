@@ -27,9 +27,19 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "GET /" do
-    xit "responds with 200" do
+    let(:user) {User.create!(username:"test", email:"test@test.com", password_string: "password")}
+    it "responds with 200" do
+      session[:user_id] = user.id
       get :index
       expect(response).to have_http_status(200)
+    end
+
+  end
+  
+  describe 'GET /' do
+    it 'responds with 302' do
+      get :index
+      expect(response).to redirect_to(root_url)
     end
   end
 end
