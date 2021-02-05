@@ -8,8 +8,6 @@ class PostsController < ApplicationController
   end
   def create_API
     data_json = JSON.parse request.body.read
-    p 'data_json'
-    p data_json
     @post = Post.new(data_json)
     @post.save
       end

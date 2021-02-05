@@ -2,28 +2,11 @@
 
   <div class="jumbotron">
     <div class='border-bottom border-dark'>
-      <h1>Acebook</h1>
+      <h1>Essbok</h1>
     </div>
 
   <div class='container'>
     <div id='posts-page'></div>
-    <div id='display-posts'></div>
-
-
-    <div id="new_post_form" class='container text-center'>
-      <%= form_for @post do |form| %>
-      <div class='row mb-4'>
-        <div class='col-xs-4 col-xs-offset-4'>
-          <%= form.text_field :message %>
-        </div>
-      </div>
-      <div class='row mb-4'>
-        <div class='col-xs-4 col-xs-offset-4'>
-          <%= form.submit "Submit", :class => "btn btn-dark" %>
-        </div>
-      </div>
-      <% end %>
-    </div>
   </div>
 </div>
 <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>

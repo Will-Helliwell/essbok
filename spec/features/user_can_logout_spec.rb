@@ -6,6 +6,6 @@ RSpec.feature "Logging out", type: :feature do
     sign_up_stephen
     logout
     expect(current_path).to eq root_path
-    expect(page).to have_content 'Hej, welcome to Essbok!'
+    expect(page).to have_content 'Hej, velkommen to Essbok!'
   end
 end
