@@ -42,12 +42,126 @@ class PostPage extends React.Component {
           },
           undefined
         );
+
+class PostForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: "",
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ message: event.target.value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const csrf = document
+      .querySelector("meta[name='csrf-token']")
+      .getAttribute("content");
+    fetch("/posts/create", {
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrf,
+      },
+      method: "POST",
+      body: JSON.stringify({
+        message: this.state.message,
+      }),
+    }).then(() => {
+      this.props.onCreateSuccess();
+    });
+  }
+
+  render() {
+    return p(
+      "form",
+      {
+        onSubmit: this.handleSubmit,
+      },
+      p(
+        "label",
+        null,
+        p("textarea", {
+          message: this.state.value,
+          onChange: this.handleChange,
+        })
+      ),
+      p("input", {
+        type: "submit",
+        value: "Submit",
       })
     );
   }
 }
 
-// Post Component
+class PostPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: [],
+    };
+    this.getData();
+  }
+  // call to API
+  getData() {
+    const url = "/index_API";
+    let postsDiv = document.getElementById("display-posts");
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => {
+        this.setState({ list: result });
+      });
+  }
+
+  render() {
+    return [
+      p(
+        PostForm,
+        {
+          onCreateSuccess: () => {
+            console.log("TRIGGER");
+            this.getData();
+          },
+        },
+        undefined
+      ),
+      p(
+        "div",
+        undefined,
+        this.state.list.map((post_data) => {
+          // console.log(post_data.id)
+          return p(
+            "div",
+            { className: "row mb-4" },
+            p(
+              "div",
+              { className: "col-xs-4 col-xs-offset-4" },
+            p(
+              Post,
+              {
+              ...post_data,
+              onDeleteSuccess: (id) => {
+                const filterList = this.state.list.filter(
+                  (post) => post.id !== id
+                );
+                this.setState({ list: filterList });
+              },
+              },
+              undefined            
+            )
+          );
+        })
+      ),
+    ];
+  }
+}
+                            
 class Post extends React.Component {
   // constructor(props) {
   //   super(props);
