@@ -42,10 +42,19 @@ Completed:
 To continue:
 - Users can like posts
 - Users can only delete their own posts
+- Each post will only show a preview of 50 words. When clicked, a pop-up will appear showing the full post
 
 ## Initial Mock-up
 
+![mockup](https://github.com/Will-Helliwell/essbok/blob/master/acebook-mockup.png)
+
 ## Screenshots of App in Use
+
+### Homepage
+![homepage](https://github.com/Will-Helliwell/essbok/blob/master/essbok%20homepage.png)
+
+### Posts Page
+![homepage](https://github.com/Will-Helliwell/essbok/blob/master/essbok%20posts%20page.png)
 
 ## Links
 
@@ -74,7 +83,3 @@ To run tests:
 ```bash
 > rspec
 ```
-
-###
-
-For work process, see the project Wiki
